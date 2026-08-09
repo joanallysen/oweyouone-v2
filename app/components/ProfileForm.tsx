@@ -9,7 +9,7 @@ export default function ProfileForm({ initialName }: { initialName: string }) {
     const [saved, setSaved] = useState(false);
     const router = useRouter();
 
-    async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
         setError('');
         setSaved(false);
