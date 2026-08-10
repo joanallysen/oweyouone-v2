@@ -72,7 +72,7 @@ export default function EditProfilePage() {
         <h1 className="text-xl font-bold mt-4">{name}</h1>
       </div>
 
-      <div className="px-5 flex flex-col gap-4">
+      <div className="px-5 flex flex-col gap-4 h-screen flex-1">
         <div>
           <label className="text-sm text-[#8B8B93] block mb-2">Change Name</label>
           <input
@@ -98,7 +98,7 @@ export default function EditProfilePage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#EDEDEF] text-[#0B0B0E] rounded-lg py-3 text-sm font-medium disabled:opacity-50 mt-2"
+          className="bg-[#EDEDEF] text-[#0B0B0E] rounded-lg py-3 text-sm font-medium disabled:opacity-50 mt-auto"
         >
           {saving ? 'Saving...' : 'Save'}
         </button>
