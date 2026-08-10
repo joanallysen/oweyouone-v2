@@ -4,102 +4,92 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AddContactButton() {
-const [open, setOpen] = useState(false);
-const [email, setEmail] = useState('');
-const [error, setError] = useState('');
-const [loading, setLoading] = useState(false);
-const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     const res = await fetch('/api/contacts', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
     });
 
+    const data = await res.json();
     setLoading(false);
 
     if (!res.ok) {
-    const data = await res.json();
-    setError(data.error || 'Something went wrong');
-    return;
+      setError(data.error || 'Something went wrong');
+      return;
+    }
+
+    if (!data.added) {
+      setError('Already in your contacts');
+      return;
     }
 
     setEmail('');
     setOpen(false);
     router.refresh();
-}
+  }
 
-return (
+  return (
     <>
-    <button
-        onClick={() => setOpen(true)}
-        style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        padding: '14px 20px',
-        borderRadius: '999px',
-        border: 'none',
-        background: '#111',
-        color: '#fff',
-        fontSize: '15px',
-        cursor: 'pointer',
-        }}
-    >
-        + Add Contact
-    </button>
+      <button onClick={() => setOpen(true)} aria-label="Add contact" className="text-[#EDEDEF]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <line x1="19" y1="8" x2="19" y2="14" />
+          <line x1="16" y1="11" x2="22" y2="11" />
+        </svg>
+      </button>
 
-    {open && (
+      {open && (
         <div
-        style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,0.4)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}
-        onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black/60 flex justify-center items-center z-30"
+          onClick={() => setOpen(false)}
         >
-        <form
+          <form
             onSubmit={handleSubmit}
             onClick={(e) => e.stopPropagation()}
-            style={{
-            background: '#fff',
-            padding: '24px',
-            borderRadius: '8px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px',
-            width: '300px',
-            }}
-        >
-            <h2 style={{ margin: 0, fontSize: '18px' }}>Add Contact</h2>
+            className="bg-[#16161A] border border-[#232328] p-6 rounded-xl flex flex-col gap-3"
+          >
+            <h2 className="m-0 text-lg text-[#EDEDEF]">Add Contact</h2>
             <input
-            type="email"
-            placeholder="Their email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            autoFocus
+              type="email"
+              placeholder="Their email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoFocus
+              className="bg-[#0B0B0E] border border-[#232328] rounded-md px-3 py-2 text-sm text-[#EDEDEF] placeholder-[#5C5C63] focus:outline-none focus:border-[#3A3A42]"
             />
-            {error && <p style={{ color: 'red', margin: 0, fontSize: '14px' }}>{error}</p>}
-            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-            <button type="button" onClick={() => setOpen(false)}>
+            {error && <p className="text-[#F87171] m-0 text-sm">{error}</p>}
+            <div className="flex gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="px-3 py-2 text-sm text-[#8B8B93]"
+              >
                 Cancel
-            </button>
-            <button type="submit" disabled={loading}>
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-3 py-2 text-sm bg-[#EDEDEF] text-[#0B0B0E] rounded-md font-medium disabled:opacity-50"
+              >
                 {loading ? 'Adding...' : 'Add'}
-            </button>
+              </button>
             </div>
-        </form>
+          </form>
         </div>
-    )}
+      )}
     </>
-);
+  );
 }

@@ -1,4 +1,5 @@
-import Footer from '@/app/components/Footer';
+import ServiceWorkerRegistration from "./ServiceWorkerRegistration";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -7,7 +8,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-full flex flex-col">{children}<Footer /></body>
+      <body>
+        {children}
+        <ServiceWorkerRegistration />
+      </body>
 
     </html>
   );
