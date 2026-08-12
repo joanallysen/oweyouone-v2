@@ -34,11 +34,11 @@ export default async function HomePage() {
   const totalNet = totalTheyOwe - totalIOwe;
 
   return (
-    <div className="min-h-screen flex flex-col pb-24 bg-[#0B0B0E] text-[#EDEDEF]">
+    <div className="min-h-screen flex flex-col pb-24 bg-bg text-text">
       {/* top bar */}
-      <div className="ticky top-0 z-10 bg-[#0B0B0E]/95 backdrop-blur-sm flex justify-between items-center px-5 py-4 border-b border-[#232328]">
+      <div className="ticky top-0 z-10 bg-bg/95 backdrop-blur-sm flex justify-between items-center px-5 py-4 border-b border-border">
         <div className="font-bold text-lg">
-          OweYouOne <span className="text-xs text-[#8B8B93] font-normal">v.2</span>
+          OweYouOne <span className="text-xs text-sec font-normal">v.2</span>
         </div>
         <div className="flex items-center gap-4">
           <AddContactButton />
@@ -49,14 +49,14 @@ export default async function HomePage() {
       <div className="px-5 py-6">
         <h1 className="text-2xl font-semibold m-0">
           {totalNet >= 0 ? (
-            <>In total, you are owed <span className="text-[#4ADE80]">${totalNet.toFixed(2)}</span></>
+            <>In total, you are owed <span className="text-owed">${totalNet.toFixed(2)}</span></>
           ) : (
-            <>In total, you owe <span className="text-[#F87171]">${Math.abs(totalNet).toFixed(2)}</span></>
+            <>In total, you owe <span className="text-owe">${Math.abs(totalNet).toFixed(2)}</span></>
           )}
         </h1>
-        <div className="flex flex-col gap-1 mt-3 text-sm text-[#8B8B93]">
-          <span>— You are owed <span className="text-[#4ADE80]">${totalTheyOwe.toFixed(2)}</span></span>
-          <span>— You owe <span className="text-[#F87171]">${totalIOwe.toFixed(2)}</span></span>
+        <div className="flex flex-col gap-1 mt-3 text-sm text-sec">
+          <span>— You are owed <span className="text-owed">${totalTheyOwe.toFixed(2)}</span></span>
+          <span>— You owe <span className="text-owe">${totalIOwe.toFixed(2)}</span></span>
         </div>
       </div>
 

@@ -46,27 +46,27 @@ export default function EditProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0B0B0E] text-[#EDEDEF] flex items-center justify-center">
-        <p className="text-[#8B8B93] text-sm">Loading...</p>
+      <div className="min-h-screen bg-bg text-text flex items-center justify-center">
+        <p className="text-sec text-sm">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col pb-24 bg-[#0B0B0E] text-[#EDEDEF]">
-      <div className="sticky top-0 z-10 bg-[#0B0B0E]/95 backdrop-blur-sm flex items-center gap-3 px-5 py-4 border-b border-[#232328]">
-        <button onClick={() => router.push('/profile')} aria-label="Back" className="text-[#EDEDEF]">
+    <div className="min-h-screen flex flex-col pb-24 bg-bg text-text">
+      <div className="sticky top-0 z-10 bg-bg/95 backdrop-blur-sm flex items-center gap-3 px-5 py-4 border-b border-border">
+        <button onClick={() => router.push('/profile')} aria-label="Back" className="text-text">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
         <div className="font-bold text-lg">
-          OweYouOne <span className="text-xs text-[#8B8B93] font-normal">v.2</span>
+          OweYouOne <span className="text-xs text-sec font-normal">v.2</span>
         </div>
       </div>
 
       <div className="flex flex-col items-center px-5 py-8">
-        <div className="w-24 h-24 rounded-full bg-[#232328] flex items-center justify-center text-2xl">
+        <div className="w-24 h-24 rounded-full bg-border flex items-center justify-center text-2xl">
           {(name || '?')[0].toUpperCase()}
         </div>
         <h1 className="text-xl font-bold mt-4">{name}</h1>
@@ -74,31 +74,31 @@ export default function EditProfilePage() {
 
       <div className="px-5 flex flex-col gap-4 h-screen flex-1">
         <div>
-          <label className="text-sm text-[#8B8B93] block mb-2">Change Name</label>
+          <label className="text-sm text-sec block mb-2">Change Name</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full bg-[#16161A] border border-[#232328] rounded-lg px-4 py-3 text-sm text-[#EDEDEF] focus:outline-none focus:border-[#5C5C63]"
+            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text focus:outline-none focus:border-[#5C5C63]"
           />
         </div>
 
         <div>
-          <label className="text-sm text-[#8B8B93] block mb-2">Change Bio</label>
+          <label className="text-sm text-sec block mb-2">Change Bio</label>
           <textarea
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             rows={2}
-            className="w-full bg-[#16161A] border border-[#232328] rounded-lg px-4 py-3 text-sm text-[#EDEDEF] focus:outline-none focus:border-[#5C5C63] resize-none"
+            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text focus:outline-none focus:border-[#5C5C63] resize-none"
           />
         </div>
 
-        {error && <p className="text-[#F87171] text-sm">{error}</p>}
+        {error && <p className="text-owe text-sm">{error}</p>}
 
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#EDEDEF] text-[#0B0B0E] rounded-lg py-3 text-sm font-medium disabled:opacity-50 mt-auto"
+          className="bg-accent-bg text-accent rounded-lg py-3 text-sm font-medium disabled:opacity-50 mt-auto"
         >
           {saving ? 'Saving...' : 'Save'}
         </button>

@@ -1,4 +1,3 @@
-import ServiceWorkerRegistration from "./ServiceWorkerRegistration";
 import "./globals.css";
 
 export default function RootLayout({
@@ -10,7 +9,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <ServiceWorkerRegistration />
       </body>
 
     </html>

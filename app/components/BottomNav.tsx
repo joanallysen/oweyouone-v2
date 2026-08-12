@@ -16,7 +16,7 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 bg-[#0B0B0E]/95 backdrop-blur-sm border-t border-[#232328] flex justify-around items-center z-20"
+      className="fixed bottom-0 left-0 right-0 bg-bg/95 backdrop-blur-sm border-t border-border flex justify-around items-center z-20"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       {tabs.map(({ href, label, icon: Icon }) => {
@@ -30,9 +30,9 @@ export default function BottomNav() {
             <Icon
               size={22}
               strokeWidth={active ? 2.5 : 1.75}
-              className={active ? 'text-[#EDEDEF]' : 'text-[#5C5C63]'}
+              className={active ? 'text-text' : 'text-muted'}
             />
-            <span className={`text-[10px] ${active ? 'text-[#EDEDEF] font-medium' : 'text-[#5C5C63]'}`}>
+            <span className={`text-[10px] ${active ? 'text-text font-medium' : 'text-muted'}`}>
               {label}
             </span>
           </Link>

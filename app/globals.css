@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+    --color-bg: #0B0B0E;
+    --color-surface: #16161A;
+    --color-border: #232328;
+    --color-border-strong: #3A3A42;
+    --color-text: #EDEDEF;
+    --color-sec: #8B8B93;      /* secondary/muted text */
+    --color-muted: #5C5C63;    /* placeholders, disabled */
+    --color-owe: #F87171;      /* red — you owe */
+    --color-owed: #4ADE80;     /* green — they owe */
+    --color-danger-bg: #3A1F1F;
+
+    --color-accent: #EDEDEF;
+    --color-accent-bg: #0055ff;
+}

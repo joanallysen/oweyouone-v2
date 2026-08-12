@@ -54,46 +54,43 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
   const contactName = contact.name || contact.email;
 
   return (
-    <div className="min-h-screen flex flex-col pb-24 bg-[#0B0B0E] text-[#EDEDEF]">
-      <div className="sticky top-0 z-10 bg-[#0B0B0E]/95 backdrop-blur-sm flex items-center gap-3 px-5 py-4 border-b border-[#232328]">
-        <Link href="/" aria-label="Back" className="text-[#EDEDEF]">
+    <div className="min-h-screen flex flex-col pb-24 bg-bg text-text">
+      <div className="sticky top-0 z-10 bg-bg/95 backdrop-blur-sm flex items-center gap-3 px-5 py-4 border-b border-border">
+        <Link href="/" aria-label="Back" className="text-text">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </Link>
         <div className="font-bold text-lg">
-          OweYouOne <span className="text-xs text-[#8B8B93] font-normal">v.2</span>
+          OweYouOne <span className="text-xs text-sec font-normal">v.2</span>
         </div>
       </div>
 
       <div className="px-5 py-6">
         <h1 className="text-2xl font-semibold m-0">
           {net >= 0 ? (
-            <>you are owed <span className="text-[#4ADE80]">${net.toFixed(2)}</span> for <span>{contactName}</span></>
+            <>you are owed <span className="text-owed">${net.toFixed(2)}</span> for <span>{contactName}</span></>
           ) : (
-            <>you owe <span className="text-[#F87171]">${Math.abs(net).toFixed(2)}</span> for <span>{contactName}</span></>
+            <>you owe <span className="text-owe">${Math.abs(net).toFixed(2)}</span> for <span>{contactName}</span></>
           )}
         </h1>
-        <div className="flex flex-col gap-1 mt-3 text-sm text-[#8B8B93]">
-          <span>You are owed <span className="text-[#4ADE80]">${theyOwe.toFixed(2)}</span></span>
-          <span>{contactName} owe you <span className="text-[#F87171]">${iOwe.toFixed(2)}</span></span>
+        <div className="flex flex-col gap-1 mt-3 text-sm text-sec">
+          <span>You are owed <span className="text-owed">${theyOwe.toFixed(2)}</span></span>
+          <span>{contactName} owe you <span className="text-owe">${iOwe.toFixed(2)}</span></span>
         </div>
       </div>
+
 
       <ExpenseList expenses={expenses} currentUserId={session.userId} contactId={contactId} />
 
       <Link
         href={`/contacts/${contactId}/add`}
-        className="fixed bottom-24 right-5 z-20 bg-[#EDEDEF] text-[#0B0B0E] rounded-full px-5 py-3 text-sm font-medium shadow-lg"
+        className="fixed bottom-24 right-5 z-20 bg-accent-bg text-accent rounded-full px-5 py-3 text-sm font-medium shadow-lg"
       >
         + Add Expense
       </Link>
 
-      <div className="px-5 mt-4">
-        <Link href={`/contacts/${contactId}/archived`} className="text-sm text-[#8B8B93] underline">
-          View archived
-        </Link>
-      </div>
+
 
       <BottomNav />
     </div>

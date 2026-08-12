@@ -41,7 +41,7 @@ export default function AddContactButton() {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} aria-label="Add contact" className="text-[#EDEDEF]">
+      <button onClick={() => setOpen(true)} aria-label="Add contact" className="text-text">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
@@ -58,9 +58,9 @@ export default function AddContactButton() {
           <form
             onSubmit={handleSubmit}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#16161A] border border-[#232328] p-6 rounded-xl flex flex-col gap-3"
+            className="bg-surface border border-border p-6 rounded-xl flex flex-col gap-3"
           >
-            <h2 className="m-0 text-lg text-[#EDEDEF]">Add Contact</h2>
+            <h2 className="m-0 text-lg text-text">Add Contact</h2>
             <input
               type="email"
               placeholder="Their email"
@@ -68,21 +68,21 @@ export default function AddContactButton() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoFocus
-              className="bg-[#0B0B0E] border border-[#232328] rounded-md px-3 py-2 text-sm text-[#EDEDEF] placeholder-[#5C5C63] focus:outline-none focus:border-[#3A3A42]"
+              className="bg-bg border border-border rounded-md px-3 py-2 text-sm text-text placeholder-muted focus:outline-none focus:border-border-strong"
             />
-            {error && <p className="text-[#F87171] m-0 text-sm">{error}</p>}
+            {error && <p className="text-owe m-0 text-sm">{error}</p>}
             <div className="flex gap-2 justify-end">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="px-3 py-2 text-sm text-[#8B8B93]"
+                className="px-3 py-2 text-sm text-sec"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-3 py-2 text-sm bg-[#EDEDEF] text-[#0B0B0E] rounded-md font-medium disabled:opacity-50"
+                className="px-3 py-2 text-sm bg-accent-bg text-accent rounded-md font-medium disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add'}
               </button>

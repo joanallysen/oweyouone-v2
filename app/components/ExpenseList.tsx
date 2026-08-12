@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
+import { Archive } from 'lucide-react';
+import Link from 'next/link';
 
 export type Expense = {
   id: number;
@@ -85,10 +87,10 @@ export default function ExpenseList({
             placeholder="Search expenses"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-[#16161A] border border-[#232328] rounded-lg px-3 py-2 text-sm text-[#EDEDEF] placeholder-[#5C5C63] focus:outline-none focus:border-[#3A3A42]"
+            className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text placeholder-muted focus:outline-none focus:border-border-strong"
           />
         </div>
-        <label className="shrink-0 text-[#8B8B93] cursor-pointer">
+        <label className="shrink-0 text-sec cursor-pointer">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="3" y="4" width="18" height="18" rx="2" />
             <line x1="16" y1="2" x2="16" y2="6" />
@@ -99,11 +101,13 @@ export default function ExpenseList({
         </label>
       </div>
 
+
+
       <div className="px-5 flex gap-2 mb-4">
         <button
           onClick={() => setShowIOwe(!showIOwe)}
           className={`text-xs px-3 py-1.5 rounded-full border ${
-            showIOwe ? 'bg-[#232328] border-[#3A3A42] text-[#EDEDEF]' : 'bg-transparent border-[#232328] text-[#5C5C63]'
+            showIOwe ? 'bg-border border-border-strong text-text' : 'bg-transparent border-border text-muted'
           }`}
         >
           I owe {showIOwe && '✕'}
@@ -111,31 +115,39 @@ export default function ExpenseList({
         <button
           onClick={() => setShowTheyOwe(!showTheyOwe)}
           className={`text-xs px-3 py-1.5 rounded-full border ${
-            showTheyOwe ? 'bg-[#232328] border-[#3A3A42] text-[#EDEDEF]' : 'bg-transparent border-[#232328] text-[#5C5C63]'
+            showTheyOwe ? 'bg-border border-border-strong text-text' : 'bg-transparent border-border text-muted'
           }`}
         >
           They owe {showTheyOwe && '✕'}
         </button>
       </div>
 
+      <div className="px-5 py-3 mb-3">
+        <Link href={`/contacts/${contactId}/archived`} className="text-sm text-muted text-center">
+          <div className='flex gap-4'>
+            <Archive />
+            <p>Archived</p>
+          </div>
+        </Link>
+      </div>
       <div className="flex flex-col px-5">
-        {groups.length === 0 && <p className="text-[#5C5C63] text-sm py-6">No expenses found.</p>}
+        {groups.length === 0 && <p className="text-muted text-sm py-6">No expenses found.</p>}
 
         {groups.map(([key, items]) => (
           <div key={key} ref={(el) => { groupRefs.current[key] = el; }} className="mb-5">
-            <p className="text-xs text-[#8B8B93] mb-2">{formatDateLabel(items[0].created_at)}</p>
+            <p className="text-xs text-sec mb-2">{formatDateLabel(items[0].created_at)}</p>
             <div className="flex flex-col gap-3">
               {items.map((e) => {
                 const iOwe = e.borrower_id === currentUserId;
                 return (
                   <div key={e.id} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className={iOwe ? 'text-[#F87171]' : 'text-[#4ADE80]'}>
+                      <span className={iOwe ? 'text-owe' : 'text-owed'}>
                         {iOwe ? '↗' : '↙'}
                       </span>
                       <div>
                         <p className="text-sm font-medium">{e.name}</p>
-                        <p className={`text-xs ${iOwe ? 'text-[#F87171]' : 'text-[#4ADE80]'}`}>
+                        <p className={`text-xs ${iOwe ? 'text-owe' : 'text-owed'}`}>
                           {iOwe ? `You borrowed $${Number(e.amount).toFixed(2)}` : `You lent $${Number(e.amount).toFixed(2)}`}
                         </p>
                       </div>
@@ -144,7 +156,7 @@ export default function ExpenseList({
                       onClick={() => handleArchive(e.id)}
                       disabled={archiving === e.id}
                       aria-label="Mark as settled"
-                      className="text-[#5C5C63] disabled:opacity-40"
+                      className="text-muted disabled:opacity-40"
                     >
                       ✓
                     </button>
