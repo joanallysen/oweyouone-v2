@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function AddContactButton() {
-  const [open, setOpen] = useState(false);
+export default function AddContactForm({onClose}: {onClose: () => void;}) {
+
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,30 +35,19 @@ export default function AddContactButton() {
     }
 
     setEmail('');
-    setOpen(false);
     router.refresh();
   }
 
   return (
     <>
-      <button onClick={() => setOpen(true)} aria-label="Add contact" className="text-text">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <line x1="19" y1="8" x2="19" y2="14" />
-          <line x1="16" y1="11" x2="22" y2="11" />
-        </svg>
-      </button>
-
-      {open && (
         <div
-          className="fixed inset-0 bg-black/60 flex justify-center items-center z-30"
-          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black/60 flex justify-center items-center z-50"
+          onClick={onClose}
         >
           <form
             onSubmit={handleSubmit}
             onClick={(e) => e.stopPropagation()}
-            className="bg-surface border border-border p-6 rounded-xl flex flex-col gap-3"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           >
             <h2 className="m-0 text-lg text-text">Add Contact</h2>
             <input
@@ -74,7 +63,7 @@ export default function AddContactButton() {
             <div className="flex gap-2 justify-end">
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={onClose}
                 className="px-3 py-2 text-sm text-sec"
               >
                 Cancel
@@ -89,7 +78,6 @@ export default function AddContactButton() {
             </div>
           </form>
         </div>
-      )}
     </>
   );
 }
