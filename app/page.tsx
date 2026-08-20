@@ -4,7 +4,7 @@ import { sql } from '@/lib/db';
 import AddContactButton from '@/app/components/AddContactButton';
 import ContactList, { type Contact } from '@/app/components/ContactList';
 import BottomNav from '@/app/components/BottomNav';
-
+// test
 export default async function HomePage() {
   const session = await getSession();
   if (!session) {
