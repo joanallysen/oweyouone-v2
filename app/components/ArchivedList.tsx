@@ -1,7 +1,9 @@
 'use client';
 
 import { Key } from 'lucide-react';
+import { formatDateLabel, dateKey } from '@/app/lib/dates';
 import {useState, useMemo} from 'react';
+
 
 export type Expense = {
     id: number;
@@ -13,15 +15,6 @@ export type Expense = {
     settled_at: string | null;
     status: string;
 };
-
-function formatDateLabel(dateStr: string){
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-US', {day: '2-digit', month: 'long'});
-}
-
-function dateKey(dateStr: string){
-    return new Date(dateStr).toISOString().slice(0, 10);
-}
 
 export default function ArchivedList({expenses, currentUserId,} : {expenses: Expense[]; currentUserId: number;}){
     const [undoing, setUndoing] = useState<number | null>(null);

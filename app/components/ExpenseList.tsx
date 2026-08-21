@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { Archive } from 'lucide-react';
 import Link from 'next/link';
+import { formatDateLabel, dateKey } from '@/app/lib/dates';
 
 export type Expense = {
   id: number;
@@ -13,15 +14,6 @@ export type Expense = {
   created_at: string;
   status: string;
 };
-
-function formatDateLabel(dateStr: string) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-US', { day: '2-digit', month: 'long' });
-}
-
-function dateKey(dateStr: string) {
-  return new Date(dateStr).toISOString().slice(0, 10);
-}
 
 export default function ExpenseList({
   expenses,

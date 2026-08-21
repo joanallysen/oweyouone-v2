@@ -32,10 +32,16 @@ export async function POST(req: NextRequest) {
   const payerId = direction === 'i_owe' ? contactId : session.userId;
   const borrowerId = direction === 'i_owe' ? session.userId : contactId;
 
-  await sql`
+  const [newExpense] = await sql`
     INSERT INTO expenses (payer_id, borrower_id, name, amount)
     VALUES (${payerId}, ${borrowerId}, ${name.trim()}, ${parsedAmount})
+    RETURNING id
   `;
+
+  await sql`
+    INSERT INTO activity (expense_id, actor_id, action)
+    VALUES (${newExpense.id}, ${session.userId}, 'created')  
+  `
 
   return NextResponse.json({ success: true });
 }
