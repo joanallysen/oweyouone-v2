@@ -1,10 +1,9 @@
-export function getInitials(name:string): string {
-    const parts = name.trim().split(/\s+/)
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+export function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-// Deterministic color per user, independent of the owe/owed semantic tokens
 const AVATAR_PALETTE = [
   'bg-violet-500/20 text-violet-300',
   'bg-sky-500/20 text-sky-300',
@@ -21,10 +20,10 @@ export function avatarColorClasses(userId: number): string {
 type ActivityAction = 'created' | 'archived' | 'unarchived';
 
 const VERB: Record<ActivityAction, string> = {
-    created: 'added',
-    archived: 'archived',
-    unarchived: 'undid',
-}
+  created: 'added',
+  archived: 'archived',
+  unarchived: 'undid',
+};
 
 export function describeActivity(params: {
   sessionUserId: number;
@@ -34,15 +33,35 @@ export function describeActivity(params: {
   borrowerName: string;
   amount: string;
   action: ActivityAction;
+  name: string;
+  splitId: number | null;
 }) {
-  const { sessionUserId, actorId, actorName, borrowerId, borrowerName, amount, action} = params;
+  const { sessionUserId, actorId, actorName, action, name, splitId } = params;
   const actorLabel = actorId === sessionUserId ? 'You' : actorName;
+
+  if (splitId) {
+    return `${actorLabel} added '${name}'`;
+  }
+
+  const { borrowerId, borrowerName, amount } = params;
   const borrowerLabel = borrowerId === sessionUserId ? 'You borrowed' : `${borrowerName} borrowed`;
-  const verb = VERB[action]; 
+  const verb = VERB[action];
   return `${actorLabel} ${verb} '${borrowerLabel} $${Number(amount).toFixed(2)}'`;
 }
 
-// color: red if session user is the borrower on this expense, green if lender
-export function amountColorClass(params: { sessionUserId: number; borrowerId: number }) {
+// For a normal expense, session is always either payer or borrower, so
+// comparing against borrowerId alone is enough. For a split, borrowerId
+// on the joined row is just one arbitrary contact, not necessarily the
+// viewer — payerId is the one field guaranteed identical across every
+// sibling row, so that's what split rows must key off instead.
+export function amountColorClass(params: {
+  sessionUserId: number;
+  borrowerId: number;
+  payerId: number;
+  splitId?: number | null;
+}) {
+  if (params.splitId) {
+    return params.sessionUserId === params.payerId ? 'text-owed' : 'text-owe';
+  }
   return params.sessionUserId === params.borrowerId ? 'text-owe' : 'text-owed';
 }
