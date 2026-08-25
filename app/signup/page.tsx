@@ -32,8 +32,8 @@ export default function SignupPage(){
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
                 <h1>Sign Up</h1>
-                <input type="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                <input type="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <button type="submit">Sign Up</button>

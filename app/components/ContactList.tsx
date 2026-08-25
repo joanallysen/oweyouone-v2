@@ -66,8 +66,8 @@ export default function ContactList({ contacts }: { contacts: Contact[] }) {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="text-[10px] text-sec uppercase tracking-wide">Net</span>
-                  <span className={`text-sm font-semibold ${net >= 0 ? 'text-owed' : 'text-owe'}`}>
-                    {net >= 0 ? '+' : '-'}${Math.abs(net).toFixed(2)}
+                  <span className={`text-sm font-semibold ${net <= 0 ? 'text-owed' : 'text-owe'}`}>
+                    {net <= 0 ? '+' : '-'}${Math.abs(net).toFixed(2)}
                   </span>
                 </div>
                 <span className="text-muted">›</span>

@@ -16,10 +16,10 @@ export default async function HomePage() {
       u.id,
       u.email,
       p.name,
-      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = ${session.userId} AND e.payer_id = u.id), 0) AS i_owe,
-      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = u.id AND e.payer_id = ${session.userId}), 0) AS they_owe,
-      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = ${session.userId} AND e.payer_id = u.id), 0)
-        - COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = u.id AND e.payer_id = ${session.userId}), 0) AS net
+      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = ${session.userId} AND e.payer_id = u.id AND status='active'), 0) AS i_owe,
+      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = u.id AND e.payer_id = ${session.userId} AND status='active'), 0) AS they_owe,
+      COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = ${session.userId} AND e.payer_id = u.id AND status='active'), 0)
+        - COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = u.id AND e.payer_id = ${session.userId} AND status='active'), 0) AS net
     FROM contacts c
     JOIN users u ON u.id = c.contact_id
     LEFT JOIN profile p ON p.user_id = u.id

@@ -36,3 +36,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 <!-- for myself set PATH=%PATH%;C:\path\to\your\node\folder -->
+
+Current Issues and Todos
+1. Login and Signup Finish the UI
+2. Add contact still need to be centered through the screen
+3. **Activity should be to me instead of David → David**
+4. Activity paragraph can be extended
+5. Hutao color scheme.

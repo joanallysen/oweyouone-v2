@@ -42,6 +42,8 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
   const theyOwe = Number(totals[0]?.they_owe ?? 0);
   const net = theyOwe - iOwe;
 
+  // slightly different method compared to homepage
+
   const expenses = await sql`
     SELECT id, name, amount, payer_id, borrower_id, created_at, status
     FROM expenses
@@ -69,14 +71,14 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
       <div className="px-5 py-6">
         <h1 className="text-2xl font-semibold m-0">
           {net >= 0 ? (
-            <>you are owed <span className="text-owed">${net.toFixed(2)}</span> for <span>{contactName}</span></>
+            <>You are owed <span className="text-owed">${net.toFixed(2)}</span> from <span>{contactName}</span></>
           ) : (
-            <>you owe <span className="text-owe">${Math.abs(net).toFixed(2)}</span> for <span>{contactName}</span></>
+            <>You owe <span className="text-owe">${Math.abs(net).toFixed(2)}</span> for <span>{contactName}</span></>
           )}
         </h1>
         <div className="flex flex-col gap-1 mt-3 text-sm text-sec">
-          <span>You are owed <span className="text-owed">${theyOwe.toFixed(2)}</span></span>
-          <span>{contactName} owe you <span className="text-owe">${iOwe.toFixed(2)}</span></span>
+          <span>— You are owed <span className="text-owed">${theyOwe.toFixed(2)}</span></span>
+          <span>— {contactName} owe you <span className="text-owe">${iOwe.toFixed(2)}</span></span>
         </div>
       </div>
 

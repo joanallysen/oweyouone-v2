@@ -38,6 +38,7 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
   return (
     <div className="bg-surface border border-border rounded-xl p-3 flex items-center gap-3">
       <div className="flex items-center gap-1 shrink-0">
+        {/* have to make sure that this get the correct payer_id to borrower_id, actor -> you or you -> actor*/}
         <InitialsAvatar
           userId={isActorSession ? sessionUserId : item.actor_id}
           name={isActorSession ? 'You' : item.actor_name}
@@ -47,6 +48,7 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
         {isSplit ? (
           <GroupAvatar />
         ) : (
+          // Have to be me or a person
           <InitialsAvatar userId={otherPartyId} name={otherPartyName} isYou={otherPartyId === sessionUserId} />
         )}
       </div>
@@ -59,3 +61,15 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
     </div>
   );
 }
+
+/*
+actor = me 
+payer = me
+borrowed = david
+
+you -> david (green) You added "David borrowed $12.00"
+
+actor = me, payer= david, borrower = me
+you -> david (red) You added "You borrowed $15.00"
+
+*/
