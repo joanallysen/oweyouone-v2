@@ -40,8 +40,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Current Issues and Todos
 1. Login and Signup Finish the UI
 2. Add contact still need to be centered through the screen
-3. **Activity should be to me instead of David → David**
-4. Activity paragraph can be extended
+    4. Activity paragraph can be extended
 5. New color scheme.
-
+6. Add a calendar and search inside the activity
+7. Make add contact grow from the bottom instead, same with add expense
+Future (optional)
+1. If user hit archived and undid multiple time, dont insert
 ## Schema

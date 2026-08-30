@@ -62,7 +62,7 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
       </div>
       <div className="min-w-0">
         <p className="text-text font-medium truncate">{item.expense_name}</p>
-        <p className={`text-sm truncate ${amountColorClass({ sessionUserId, borrowerId: item.borrower_id, payerId: item.payer_id, splitId: item.split_id })}`}>
+        <p className={`text-sm ${amountColorClass({ sessionUserId, borrowerId: item.borrower_id, payerId: item.payer_id, splitId: item.split_id })}`}>
           {description}
         </p>
       </div>
