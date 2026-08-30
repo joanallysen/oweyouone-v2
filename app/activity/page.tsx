@@ -13,16 +13,18 @@ export default async function ActivityPage() {
 
     const activityRows = await sql`
         SELECT
-        a.id, a.action, a.created_at, a.actor_id, a.split_id,
+        a.id, a.action, a.created_at, a.actor_id, a.receiver_id, a.split_id,
         e.id as expense_id,
         e.name as expense_name,
         e.amount, e.payer_id, e.borrower_id,
         actor.name as actor_name,
+        receiver.name as receiver_name,
         payer.name as payer_name,
         borrower.name as borrower_name
         FROM activity a
         JOIN expenses e ON e.id = a.expense_id
         JOIN profile actor ON actor.user_id = a.actor_id
+        LEFT JOIN profile receiver ON receiver.user_id = a.receiver_id
         JOIN profile payer ON payer.user_id = e.payer_id
         JOIN profile borrower ON borrower.user_id = e.borrower_id
         WHERE

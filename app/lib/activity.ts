@@ -29,6 +29,8 @@ export function describeActivity(params: {
   sessionUserId: number;
   actorId: number;
   actorName: string;
+  receiverId: number;
+  receiverName: string;
   borrowerId: number;
   borrowerName: string;
   amount: string;

@@ -29,9 +29,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'Not found or not authorized' }, { status: 404 });
   }
 
+  const expense = rows[0];
+  const receiverId = expense.payer_id === session.userId ? expense.borrower_id : expense.payer_id;
+
   await sql`
-    INSERT INTO activity(expense_id, actor_id, action)
-    VALUES (${rows[0].id}, ${session.userId}, ${status === 'archived' ? 'archived': 'unarchived'})
+    INSERT INTO activity(expense_id, actor_id, receiver_id, action)
+    VALUES (${expense.id}, ${session.userId}, ${receiverId}, ${status === 'archived' ? 'archived': 'unarchived'})
   `
 
   return NextResponse.json({ success: true });

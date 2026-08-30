@@ -42,4 +42,6 @@ Current Issues and Todos
 2. Add contact still need to be centered through the screen
 3. **Activity should be to me instead of David → David**
 4. Activity paragraph can be extended
-5. Hutao color scheme.
+5. New color scheme.
+
+## Schema

@@ -20,13 +20,22 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
   const isActorSession = item.actor_id === sessionUserId;
   const isSplit = item.split_id != null;
 
-  const otherPartyId = item.payer_id === sessionUserId ? item.borrower_id : item.payer_id;
-  const otherPartyName = item.payer_id === sessionUserId ? item.borrower_name : item.payer_name;
+  // other party (receiver), the one affected by the activity.
+  /*
+    if item.payer_id == sessionUserId 
+      return item.borrowed_id
+    else 
+      return item.payer_id
+  */
+  const otherPartyId = item.receiver_id;
+  const otherPartyName = item.receiver_name;
 
   const description = describeActivity({
     sessionUserId,
     actorId: item.actor_id,
     actorName: item.actor_name,
+    receiverId: item.receiver_id,
+    receiverName: item.receiver_name,
     borrowerId: item.borrower_id,
     borrowerName: item.borrower_name,
     amount: item.amount,
@@ -38,7 +47,7 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
   return (
     <div className="bg-surface border border-border rounded-xl p-3 flex items-center gap-3">
       <div className="flex items-center gap-1 shrink-0">
-        {/* have to make sure that this get the correct payer_id to borrower_id, actor -> you or you -> actor*/}
+        {/* the actor avatar. */}
         <InitialsAvatar
           userId={isActorSession ? sessionUserId : item.actor_id}
           name={isActorSession ? 'You' : item.actor_name}
@@ -48,7 +57,6 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
         {isSplit ? (
           <GroupAvatar />
         ) : (
-          // Have to be me or a person
           <InitialsAvatar userId={otherPartyId} name={otherPartyName} isYou={otherPartyId === sessionUserId} />
         )}
       </div>
@@ -63,13 +71,23 @@ export default function ActivityRow({ sessionUserId, item }: { sessionUserId: nu
 }
 
 /*
-actor = me 
-payer = me
-borrowed = david
+actor me payer me borrower david
+me -> david (green)
+actor -> receiver (borrower david so green)
 
-you -> david (green) You added "David borrowed $12.00"
+actor me payer david borrower me
+me -> david (red)
+actor -> receiver (borrower me so red)
 
-actor = me, payer= david, borrower = me
-you -> david (red) You added "You borrowed $15.00"
+actor david payer me borrower david
+david -> me (green)
+actor -> receiver (borrower david so green)
 
+actor david payer david borrower me
+david -> me (red)
+actor -> receiver (borrowed me so red)
+
+actor id
+receiver id
+borrower id
 */

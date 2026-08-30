@@ -39,8 +39,8 @@ export async function POST(req: NextRequest) {
   `;
 
   await sql`
-    INSERT INTO activity (expense_id, actor_id, action)
-    VALUES (${newExpense.id}, ${session.userId}, 'created')  
+    INSERT INTO activity (expense_id, actor_id, receiver_id, action)
+    VALUES (${newExpense.id}, ${session.userId}, ${contactId},'created')  
   `
 
   return NextResponse.json({ success: true });
