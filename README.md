@@ -38,7 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 <!-- for myself set PATH=%PATH%;C:\path\to\your\node\folder -->
 
 Current Issues and Todos
-5. New color scheme.
 Future (optional)
 1. If user hit archived and undid multiple time, dont insert to activity
 ## Schema
