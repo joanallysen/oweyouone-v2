@@ -38,12 +38,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 <!-- for myself set PATH=%PATH%;C:\path\to\your\node\folder -->
 
 Current Issues and Todos
-1. Login and Signup Finish the UI
-2. Add contact still need to be centered through the screen
-    4. Activity paragraph can be extended
 5. New color scheme.
 6. Add a calendar and search inside the activity
-7. Make add contact grow from the bottom instead, same with add expense
+7. Definitely SPlit Page need some changes
 Future (optional)
 1. If user hit archived and undid multiple time, dont insert
 ## Schema

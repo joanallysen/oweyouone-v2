@@ -37,8 +37,11 @@ export default async function SplitPage() {
         </div>
       </div>
 
-      <div className="px-5 py-6">
-        <h1 className="text-base font-semibold m-0">Select the contacts you want to split with</h1>
+      <div className="px-5 pt-6 pb-2">
+          <h1 className="text-2xl font-semibold m-0">Split</h1>
+      </div>
+      <div className="px-5 pb-6">
+        <h1 className="text-muted text-xs m-0">Select the contacts you want to split with</h1>
       </div>
 
       <SplitContactPicker contacts={contacts} />

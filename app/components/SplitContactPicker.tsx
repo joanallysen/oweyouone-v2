@@ -52,7 +52,7 @@ export default function SplitContactPicker({ contacts }: { contacts: SplitContac
       </div>
 
       {contacts.length > 0 && (
-        <div className="fixed bottom-24 left-0 right-0 z-20 bg-bg/95 backdrop-blur-sm border-t border-border px-5 pt-3 pb-4">
+        <div className="fixed bottom-16 left-0 right-0 z-20 bg-bg/95 backdrop-blur-sm border-t border-border px-5 pt-3 pb-4">
           <button type="button" onClick={selectAll} className="w-full text-sm font-medium text-text text-center mb-3">
             {allSelected ? 'Deselect All' : 'Select All'}
           </button>

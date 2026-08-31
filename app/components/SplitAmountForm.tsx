@@ -160,7 +160,7 @@ export default function SplitAmountForm({ contacts }: { contacts: SplitContact[]
         {error && <p className="text-sm text-danger-bg">{error}</p>}
       </div>
 
-      <div className="fixed bottom-24 left-0 right-0 z-20 bg-bg/95 backdrop-blur-sm border-t border-border px-5 pt-3 pb-4">
+      <div className="fixed bottom-20 left-0 right-0 z-20 bg-bg/95 backdrop-blur-sm border-t border-border px-5 pt-3 pb-4">
         <button
           type="button"
           onClick={handleSubmit}

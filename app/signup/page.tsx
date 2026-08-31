@@ -1,27 +1,31 @@
 'use client';
 
-import {useState} from 'react';
-import {useRouter} from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
-export default function SignupPage(){
+export default function SignupPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    async function handleSubmit(e: React.SubmitEvent){
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
-        const res = await fetch ('api/signup', {
+        const res = await fetch('/api/signup', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password}),
-        })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-        if (!res.ok){
-            const data = await res.json()
+        if (!res.ok) {
+            const data = await res.json();
             setError(data.error || 'Something went wrong');
+            setLoading(false);
             return;
         }
 
@@ -29,16 +33,69 @@ export default function SignupPage(){
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
-                <h1>Sign Up</h1>
-                <input type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <div className='min-h-screen flex flex-col justify-center items-center bg-bg text-text px-6 py-10'>
+            <div className='min-w-full flex flex-col items-center flex-1 justify-center'>
+                <Image src="/icons/icon.svg" alt="icon" width={200} height={200} priority />
+                <h1 className='font-extrabold text-3xl mt-3'>OweYouOne</h1>
 
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Sign Up</button>
-                <a href="/login">Already have an account? Log in</a>
-            </form>
+                <form onSubmit={handleSubmit} className='flex flex-col w-[80%] mt-8 gap-2'>
+                    <div className="relative mb-4">
+                        <input
+                            id="email"
+                            autoFocus
+                            className="peer w-full p-3 pt-4 rounded-md border border-border text-text placeholder-transparent focus:outline-none focus:border-accent-bg"
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <label
+                            htmlFor="email"
+                            className="absolute left-2 -top-2 text-xs text-accent-bg bg-bg px-1 rounded transition-all
+                            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-muted peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0
+                            peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-accent-bg peer-focus:bg-bg peer-focus:px-1"
+                        >
+                            Email
+                        </label>
+                    </div>
+
+                    <div className="relative mb-12">
+                        <input
+                            id="password"
+                            className="peer w-full p-3 pt-4 rounded-md border border-border text-text placeholder-transparent focus:outline-none focus:border-accent-bg"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <label
+                            htmlFor="password"
+                            className="absolute left-2 -top-2 text-xs text-accent-bg bg-bg px-1 rounded transition-all
+                            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-muted peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0
+                            peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-accent-bg peer-focus:bg-bg peer-focus:px-1"
+                        >
+                            Password
+                        </label>
+                    </div>
+
+                    {error && <p className="text-owe text-sm">{error}</p>}
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="text-white bg-accent-bg p-3 rounded-4xl disabled:opacity-60"
+                    >
+                        {loading ? 'Signing up...' : 'Sign Up'}
+                    </button>
+                </form>
+            </div>
+
+            <a href="/login" className="pb-4 text-sec hover:text-text">
+                Already have an account? <span className='underline'>Log in</span>
+            </a>
+
         </div>
-    )
+    );
 }

@@ -17,15 +17,15 @@ async function handleSubmit(e: React.SubmitEvent) {
     setLoading(true);
 
     const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
     });
 
     if (!res.ok) {
-    const data = await res.json();
-    setError(data.error || 'Something went wrong');
-    return;
+        const data = await res.json();
+        setError(data.error || 'Something went wrong');
+        return;
     }
 
     router.push('/');
@@ -34,13 +34,14 @@ async function handleSubmit(e: React.SubmitEvent) {
 return (
     <div className='min-h-screen flex flex-col justify-center items-center bg-bg text-text px-6 py-10'>
         <div className='min-w-full flex flex-col items-center flex-1 justify-center'>
-            <Image src="/icons/icon.svg" alt="icon" width={250} height={250} priority/>
+            <Image src="/icons/icon.svg" alt="icon" width={200} height={200} priority/>
             <h1 className='font-extrabold text-3xl mt-3'>OweYouOne</h1>
 
-            <form onSubmit={handleSubmit} className='flex flex-col w-full max-w-sm mt-8 gap-8'>
+            <form onSubmit={handleSubmit} className='flex flex-col w-[80%] mt-8 gap-2'>
                 <div className="relative mb-4">
                     <input
                         id="email"
+                        autoFocus
                         className="peer w-full p-3 pt-4 rounded-md border border-border text-text placeholder-transparent focus:outline-none focus:border-accent-bg"
                         type="email"
                         placeholder="Email"
@@ -58,7 +59,7 @@ return (
                     </label>
                     </div>
 
-                    <div className="relative mb-4">
+                    <div className="relative mb-12">
                     <input
                         id="password"
                         className="peer w-full p-3 pt-4 rounded-md border border-border text-text placeholder-transparent focus:outline-none focus:border-accent-bg"
@@ -85,7 +86,7 @@ return (
                 <button
                     type="submit"
                     disabled={loading}
-                    className="font-bold text-white bg-accent-bg p-3 rounded-4xl disabled:opacity-60"
+                    className="text-white bg-accent-bg p-3 rounded-4xl disabled:opacity-60"
                 >
                     {loading ? 'Logging in...' : 'Log In'}
                 </button>
@@ -93,7 +94,7 @@ return (
         </div>
 
         <a href="/signup" className="pb-4 text-sec hover:text-text">
-            Need an account? Sign up
+            Need an account? <span className='underline'>Sign up</span>
         </a>
 
     </div>

@@ -28,9 +28,9 @@ export default async function AddExpensePage({ params }: { params: Promise<{ id:
   }
 
   return (
-    <AddExpenseForm
-      contactId={contactId}
-      contactName={contact.name || contact.email}
-    />
+      <AddExpenseForm
+        contactId={contactId}
+        contactName={contact.name || contact.email}
+      />
   );
 }
