@@ -1,4 +1,10 @@
 import "./globals.css";
+import {Providers} from './providers';
+
+import { Inter, Playfair_Display } from "next/font/google";
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif-playfair" });
+
 
 export default function RootLayout({
   children,
@@ -6,9 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
       <body>
-          {children}
+        <Providers>{children}</Providers>
       </body>
 
     </html>

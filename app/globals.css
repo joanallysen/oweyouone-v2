@@ -1,18 +1,71 @@
 @import "tailwindcss";
 
-@theme {
-    --color-bg: #0B0B0E;
-    --color-surface: #16161A;
-    --color-border: #232328;
-    --color-border-strong: #3A3A42;
-    --color-text: #EDEDEF;
-    --color-sec: #8B8B93;      /* secondary/muted text */
-    --color-muted: #5C5C63;    /* placeholders, disabled */
-    --color-owe: #F87171;      /* red — you owe */
-    --color-owed: #4ADE80;     /* green — they owe */
-    --color-danger-bg: #3A1F1F;
+@theme inline {
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-border: var(--border);
+    --color-border-strong: var(--border-strong);
+    --color-text: var(--text);
+    --color-sec: var(--sec);
+    --color-muted: var(--muted);
+    --color-owe: var(--owe);
+    --color-owed: var(--owed);
+    --color-danger-bg: var(--danger-bg);
+    --color-accent: var(--accent);
+    --color-accent-bg: var(--accent-bg);
 
-    --color-accent: #EDEDEF;
-    --color-accent-bg: #0055ff;
+    --font-heading: var(--heading-font);
+    --font-body: var(--body-font);
 }
 
+:root,
+[data-theme="dark"] {
+    --bg: #0B0B0E;
+    --surface: #16161A;
+    --border: #232328;
+    --border-strong: #3A3A42;
+    --text: #EDEDEF;
+    --sec: #8B8B93;
+    --muted: #5C5C63;
+    --owe: #F87171;
+    --owed: #4ADE80;
+    --danger-bg: #3A1F1F;
+    --accent: #EDEDEF;
+    --accent-bg: #0055ff;
+
+    --heading-font: var(--font-sans-inter);
+    --body-font: var(--font-sans-inter);
+}
+
+[data-theme="light"] {
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --border: #E5E5E8;
+    --border-strong: #D1D1D6;
+    --text: #16161A;
+    --sec: #5C5C63;
+    --muted: #8B8B93;
+    --owe: #DC2626;
+    --owed: #16A34A;
+    --danger-bg: #FEE2E2;
+    --accent: #16161A;
+    --accent-bg: #0055ff;
+}
+
+[data-theme="bloom"] {
+    --bg: #FDF1F1;
+    --surface: #FFFFFF;
+    --border: #F3DCE0;
+    --border-strong: #E8C2CC;
+    --text: #3D0F26;
+    --sec: #C6577E;
+    --muted: #C9A3AE;
+    --owe: #6c1232;
+    --owed: #1a5c27;
+    --danger-bg: #FBE0E6;
+    --accent: #FFFFFF;
+    --accent-bg: #5C1A3C;
+
+    --heading-font: var(--font-serif-playfair);
+    --body-font: var(--font-sans-inter);
+}

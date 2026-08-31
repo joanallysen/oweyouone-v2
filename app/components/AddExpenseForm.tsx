@@ -95,31 +95,32 @@ export default function AddExpenseForm({
           </div>
 
           <div>
-            <label className="text-sm text-sec block mb-2">Title</label>
+            <label className="text-xs text-sec mb-1 block">Title</label>
             <input
               type="text"
-              placeholder="e.g. Oil, Rent, Dinner"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent-bg/40 focus:border-accent-bg transition-colors"
-              autoFocus
+              placeholder="Dinner"
+              className="w-full bg-transparent border-b border-border py-2 text-sm text-text placeholder-muted focus:outline-none focus:border-border-strong mb-5"
             />
           </div>
 
           <div>
-            <label className="text-sm text-sec block mb-2">Amount</label>
-            <div className="flex items-center bg-surface border border-border rounded-xl px-4 py-8 focus-within:ring-2 focus-within:ring-accent-bg/40 focus-within:border-accent-bg transition-colors">
-              <span className="text-4xl font-bold mr-1 text-white">$</span>
+            <label className="text-xs text-sec mb-1 block">Price</label>
+            <div className="flex items-baseline gap-1">
+              <span className="text-3xl font-bold text-text">$</span>
               <input
-                type="text"
+                type="number"
                 inputMode="decimal"
-                placeholder="0.00"
+                step="0.01"
+                min="0"
                 value={amount}
                 onChange={(e) => {
                   const val = e.target.value;
                   if (/^\d*\.?\d{0,2}$/.test(val)) setAmount(val);
                 }}
-                className="flex-1 min-w-0 max-w-[200px] bg-transparent text-4xl font-bold outline-none placeholder-muted"
+                placeholder="0.00"
+                className="flex-1 min-w-0 bg-transparent border-b border-border py-1 text-3xl font-bold text-text placeholder-muted focus:outline-none focus:border-border-strong"
               />
             </div>
           </div>

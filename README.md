@@ -39,8 +39,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Current Issues and Todos
 5. New color scheme.
-6. Add a calendar and search inside the activity
-7. Definitely SPlit Page need some changes
 Future (optional)
-1. If user hit archived and undid multiple time, dont insert
+1. If user hit archived and undid multiple time, dont insert to activity
 ## Schema

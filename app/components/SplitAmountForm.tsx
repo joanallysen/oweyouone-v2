@@ -126,7 +126,7 @@ export default function SplitAmountForm({ contacts }: { contacts: SplitContact[]
                   value={totalAmount}
                   onChange={(e) => setTotalAmount(e.target.value)}
                   placeholder="0.00"
-                  className="flex-1 bg-transparent border-b border-border py-1 text-3xl font-bold text-text placeholder-muted focus:outline-none focus:border-border-strong"
+                  className="flex-1 min-w-0 bg-transparent border-b border-border py-1 text-3xl font-bold text-text placeholder-muted focus:outline-none focus:border-border-strong"
                 />
               </div>
 
@@ -141,6 +141,7 @@ export default function SplitAmountForm({ contacts }: { contacts: SplitContact[]
               {contacts.map((c) => (
                 <div key={c.id} className="flex items-center justify-between gap-3">
                   <span className="text-sm text-text">{c.name}</span>
+                  
                   <input
                     type="number"
                     inputMode="decimal"
@@ -165,7 +166,7 @@ export default function SplitAmountForm({ contacts }: { contacts: SplitContact[]
           type="button"
           onClick={handleSubmit}
           disabled={!canSubmit || submitting}
-          className="w-full bg-border border border-border-strong rounded-lg py-3 text-sm font-medium text-text disabled:opacity-40"
+          className="w-full bg-accent-bg order-border-strong rounded-lg py-3 text-sm font-medium text-text disabled:opacity-40"
         >
           {submitting ? 'Splitting…' : 'Split'}
         </button>

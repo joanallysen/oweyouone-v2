@@ -10,6 +10,7 @@ export default async function ActivityPage() {
     if (!session) {
         redirect('/login');
     }
+    
 
     const activityRows = await sql`
         SELECT
@@ -28,14 +29,17 @@ export default async function ActivityPage() {
         JOIN profile payer ON payer.user_id = e.payer_id
         JOIN profile borrower ON borrower.user_id = e.borrower_id
         WHERE
-        (a.split_id IS NULL AND (e.payer_id = ${session.userId} OR e.borrower_id = ${session.userId}))
-        OR
-        (a.split_id IS NOT NULL AND EXISTS (
-            SELECT 1 FROM expenses e2
-            WHERE e2.split_id = a.split_id
-            AND (e2.payer_id = ${session.userId} OR e2.borrower_id = ${session.userId})
-        ))
+        (
+            (a.split_id IS NULL AND (e.payer_id = ${session.userId} OR e.borrower_id = ${session.userId}))
+            OR
+            (a.split_id IS NOT NULL AND EXISTS (
+                SELECT 1 FROM expenses e2
+                WHERE e2.split_id = a.split_id
+                AND (e2.payer_id = ${session.userId} OR e2.borrower_id = ${session.userId})
+            ))
+        )
         ORDER BY a.created_at DESC
+        LIMIT 50
     `;
 
     const groups = new Map<string, typeof activityRows>();

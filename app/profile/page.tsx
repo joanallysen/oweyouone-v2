@@ -3,6 +3,7 @@ import { getSession } from '@/lib/session';
 import { sql } from '@/lib/db';
 import BottomNav from '@/app/components/BottomNav';
 import LogoutButton from '@/app/components/LogoutButton';
+import ThemeSwitcher from '@/app/components/ThemeSwitcher';
 import Link from 'next/link';
 
 export default async function ProfilePage() {
@@ -42,7 +43,7 @@ export default async function ProfilePage() {
         <div className="w-24 h-24 rounded-full bg-border flex items-center justify-center text-2xl">
           {(profile?.name || profile?.email || profile?.bio ||'?')[0].toUpperCase()}
         </div>
-        <h1 className="text-xl font-bold mt-4">{profile?.name}</h1>
+        <h1 className="text-xl text-text font-bold mt-4">{profile?.name}</h1>
         <p className="text-m text-sec mt-1">{profile?.email}</p>
         {profile?.bio && (
           <p className="text-sm text-sec mt-3 text-center px-6">{profile.bio}</p>
@@ -79,7 +80,10 @@ export default async function ProfilePage() {
           <span className="text-muted">›</span>
         </Link>
       </div>
-
+      
+      <div className='px-5 mt-6'>
+        <ThemeSwitcher/>
+      </div>
       <div className="px-5 mt-6">
         <LogoutButton />
       </div>
