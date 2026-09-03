@@ -49,7 +49,7 @@ export default async function ArchivedPage({params} : {params : Promise<{id:stri
             </Link>
 
             <div className='font-bold text-lg'>
-                Archived with {contact.name || contact.email}
+                Completed settlements with {contact.name || contact.email}
             </div>
         </div>
         <ArchivedList expenses={expenses} currentUserId={session.userId} />

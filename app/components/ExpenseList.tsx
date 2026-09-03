@@ -118,7 +118,7 @@ export default function ExpenseList({
         <Link href={`/contacts/${contactId}/archived`} className="text-sm text-muted text-center">
           <div className='flex gap-4'>
             <Archive />
-            <p>Archived</p>
+            <p>Completed</p>
           </div>
         </Link>
       </div>

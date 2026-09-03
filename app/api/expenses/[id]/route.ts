@@ -22,7 +22,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     SET status = ${status}, settled_at = ${status === 'archived' ? new Date().toISOString() : null}
     WHERE id = ${expenseId}
       AND (payer_id = ${session.userId} OR borrower_id = ${session.userId})
-    RETURNING id
+    RETURNING id, payer_id, borrower_id
   `;
   
   if (rows.length === 0) {

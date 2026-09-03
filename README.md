@@ -38,6 +38,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 <!-- for myself set PATH=%PATH%;C:\path\to\your\node\folder -->
 
 Current Issues and Todos
+1. Do final user testing
+2. Make the session last forever.
+    3. Change archived to completed and make a description, completed task are here, (completed task is still archive in the system)
+    4. In the completed/archived should show the date, money created
+5. Activity that have not been read should be highlighted
 Future (optional)
 1. If user hit archived and undid multiple time, dont insert to activity
+2. FIx the calendar
 ## Schema
