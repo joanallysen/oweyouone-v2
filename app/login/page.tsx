@@ -16,19 +16,26 @@ async function handleSubmit(e: React.SubmitEvent) {
     setError('');
     setLoading(true);
 
-    const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-    });
+    try{
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-    if (!res.ok) {
-        const data = await res.json();
-        setError(data.error || 'Something went wrong');
-        return;
+        if (!res.ok) {
+            const data = await res.json();
+            setError(data.error || 'Something went wrong');
+            return;
+        }
+
+        router.push('/');
+    } catch (err) {
+        setError('Network error, please try again');
+    } finally {
+        setLoading(false);
     }
-
-    router.push('/');
+    
 }
 
 return (
