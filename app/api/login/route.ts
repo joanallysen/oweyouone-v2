@@ -1,7 +1,7 @@
 import {sql} from '@/lib/db';
 import bcrypt from 'bcryptjs';
 import {NextRequest, NextResponse} from 'next/server';
-import {cookies} from 'next/headers';
+import {createSession} from '@/lib/session'
 
 export async function POST(req: NextRequest) {
     const {email, password} = await req.json();
@@ -23,13 +23,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
-    (await cookies()).set('session_user_id', String(user.id), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24 * 365,
-    });
+    await createSession(user.id);
 
     return NextResponse.json({ id: user.id });
 }
