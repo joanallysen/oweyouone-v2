@@ -25,7 +25,8 @@ export default async function ProfilePage() {
       COALESCE(SUM(e.amount) FILTER (WHERE e.borrower_id = ${session.userId}), 0) AS i_owe,
       COALESCE(SUM(e.amount) FILTER (WHERE e.payer_id = ${session.userId}), 0) AS they_owe
     FROM expenses e
-    WHERE e.borrower_id = ${session.userId} OR e.payer_id = ${session.userId}
+    WHERE (e.borrower_id = ${session.userId} OR e.payer_id = ${session.userId})
+    AND e.status = 'active'
   `;
   const iOwe = Number(totals[0]?.i_owe ?? 0);
   const theyOwe = Number(totals[0]?.they_owe ?? 0);

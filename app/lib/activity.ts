@@ -68,3 +68,61 @@ export function amountColorClass(params: {
   }
   return params.sessionUserId === params.borrowerId ? 'text-owe' : 'text-owed';
 }
+
+type ActivityRow = {
+    id: number;
+    action: 'created' | 'archived' | 'unarchived';
+    created_at: Date;
+    actor_id: number;
+    receiver_id: number | null;
+    split_id: number | null;
+    expense_id: number;
+    expense_name: string;
+    amount: string | number;
+    payer_id: number;
+    borrower_id: number;
+    actor_name: string;
+    receiver_name: string | null;
+    payer_name: string;
+    borrower_name: string;
+};
+
+function activityDay(date: Date): string {
+    return date.toISOString().slice(0, 10);
+}
+
+export function collapseActivity(rows: any[]): any[] {
+    const result: ActivityRow[] = [];
+    const seen = new Set<string>();
+
+    for (const row of rows) {
+        // Created is always meaningful, so keep it.
+        if (row.action === 'created') {
+            result.push(row);
+            continue;
+        }
+
+        // Group archive/unarchive events by:
+        // expense + actor + calendar day
+        const day = activityDay(row.created_at);
+        const key = `${row.expense_id}:${row.actor_id}:${day}`;
+
+        // Because rows are newest -> oldest, we've already
+        // processed the newest event for this group.
+        if (seen.has(key)) {
+            continue;
+        }
+
+        seen.add(key);
+
+        // Only the newest archive/unarchive matters.
+        // Archived = show it.
+        // Unarchived = hide the whole cycle.
+        if (row.action === 'archived') {
+            result.push(row);
+        }
+    }
+
+    return result;
+}
+

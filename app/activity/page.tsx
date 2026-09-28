@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import BottomNav from '@/app/components/BottomNav';
 import ActivityRow from '@/app/components/ActivityRow';
 import { formatDateLabel, dateKey } from '@/app/lib/dates';
+import { collapseActivity } from '@/app/lib/activity';
 
 export default async function ActivityPage() {
     const session = await getSession();
@@ -12,7 +13,7 @@ export default async function ActivityPage() {
     }
     
 
-    const activityRows = await sql`
+    const rawActivityRows = await sql`
         SELECT
         a.id, a.action, a.created_at, a.actor_id, a.receiver_id, a.split_id,
         e.id as expense_id,
@@ -41,6 +42,8 @@ export default async function ActivityPage() {
         ORDER BY a.created_at DESC
         LIMIT 50
     `;
+
+    const activityRows = collapseActivity(rawActivityRows).slice(0, 50);
 
     const groups = new Map<string, typeof activityRows>();
     for (const row of activityRows) {

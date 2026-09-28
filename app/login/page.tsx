@@ -41,7 +41,17 @@ async function handleSubmit(e: React.SubmitEvent) {
 return (
     <div className='min-h-screen flex flex-col justify-center items-center bg-bg text-text px-6 py-10'>
         <div className='min-w-full flex flex-col items-center flex-1 justify-center'>
-            <Image src="/icons/icon.svg" alt="icon" width={200} height={200} priority/>
+            <div className='flex items-center justify-center w-40 h-40 text-text'>
+                <svg width="362" height="330" viewBox="0 0 362 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="102" cy="50" r="49" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="102" cy="227" r="59" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="262" cy="230" r="59" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="262" cy="230" r="99" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M102 125C135.861 125 165.868 141.5 184.42 166.898C183.983 167.435 183.552 167.976 183.126 168.521C164.964 143.37 135.394 127 102 127C46.7715 127 2 171.772 2 227C2 282.228 46.7715 327 102 327C134.047 327 162.572 311.923 180.873 288.478C181.278 289.039 181.689 289.596 182.105 290.148C163.426 313.811 134.487 329 102 329C45.667 329 0 283.333 0 227C0 170.667 45.667 125 102 125Z" fill="currentColor"/>
+                    <circle cx="262" cy="53" r="49" stroke="currentColor" strokeWidth="2"/>
+                </svg>
+            </div>
+
             <h1 className='font-extrabold text-3xl mt-3'>OweYouOne</h1>
 
             <form onSubmit={handleSubmit} className='flex flex-col w-[80%] mt-8 gap-2'>
