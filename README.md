@@ -1,5 +1,7 @@
 # OweYouOne
 
+https://github.com/user-attachments/assets/eb155bdd-b970-440c-902e-1a513b1c6ffd
+
 **A personal expense tracker for friends — see who owes whom, split bills evenly, and settle up over time.**
 
 ---
